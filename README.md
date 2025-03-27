@@ -106,21 +106,22 @@ sns.jointplot(x="Age",y="Fare",data=df)
 fig, ax1 = plt.subplots(figsize=(8,5))
 plt = sns.boxplot(ax=ax1,x='Pclass',y='Age',hue='Gender',data=df)
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![Screenshot 2025-03-27 114343](https://github.com/user-attachments/assets/90e899fd-7684-4485-a66e-a62bb912bdab)
+```
+sns.catplot(data=df,col="Survived",x="Gender",hue="Pclass",kind="count")
+```
+![Screenshot 2025-03-27 114356](https://github.com/user-attachments/assets/97dac10d-6c68-4299-ad2c-8e9f711f1fb9)
+```
+numerical_features = df.select_dtypes(include=['number'])
+corr = numerical_features.corr()
+sns.heatmap(corr, annot=True)
+```
+![Screenshot 2025-03-27 114411](https://github.com/user-attachments/assets/55f49d97-106f-4b6d-abc8-473c0dd09b83)
+```
+sns.pairplot(df)
+```
+![Screenshot 2025-03-27 114437](https://github.com/user-attachments/assets/46f6ac17-cf73-4183-a50b-62d74cd6e6b3)
+![Screenshot 2025-03-27 114454](https://github.com/user-attachments/assets/02d86f90-7291-40d3-b278-199001ef0902)
 
 # RESULT
 We have performed Exploratory Data Analysis on the given data set successfully.
