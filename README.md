@@ -26,24 +26,100 @@ STEP 7: Use cross tabulation method to quantitatively analyze the relationship b
 STEP 8: Use heatmap method of representation to show relationships between two variables, one plotted on each axis.
 
 ## CODING AND OUTPUT
-![Screenshot 2025-03-27 111013](https://github.com/user-attachments/assets/c82986b6-837c-4ed5-8e76-a62f6c58718d)
-![Screenshot 2025-03-27 111035](https://github.com/user-attachments/assets/b387d9bf-fdfb-4a77-8d8b-6dc876ccf4b2)
-![Screenshot 2025-03-27 111050](https://github.com/user-attachments/assets/852554d6-b40b-4d24-94f6-00403534aaa1)
-![Screenshot 2025-03-27 111107](https://github.com/user-attachments/assets/92ff541e-4dbd-4189-b653-038089e0e36e)
-![Screenshot 2025-03-27 111123](https://github.com/user-attachments/assets/6f8e5797-4e83-4f0e-a574-2bbd528d1854)
-![Screenshot 2025-03-27 111139](https://github.com/user-attachments/assets/43431c71-beb2-4085-a470-08c9ff0afb60)
-![Screenshot 2025-03-27 111154](https://github.com/user-attachments/assets/7c4c89b1-c34e-4ad0-b1b7-d6741389d94d)
-![Screenshot 2025-03-27 111208](https://github.com/user-attachments/assets/189d67ba-6f34-47a8-8c90-6b617f896d22)
-![Screenshot 2025-03-27 111223](https://github.com/user-attachments/assets/34a39948-278c-4627-b051-7db55ddd3cd7)
-![Screenshot 2025-03-27 111235](https://github.com/user-attachments/assets/6d766ab6-cd2c-4e7d-94c7-9ddd0671a2c9)
-![Screenshot 2025-03-27 111247](https://github.com/user-attachments/assets/1c0b8f1f-cc8d-4b95-a18e-fcda69a3547b)
-![Screenshot 2025-03-27 111259](https://github.com/user-attachments/assets/13718ac5-5066-4bf3-a656-2114ee4c6a0f)
-![Screenshot 2025-03-27 111313](https://github.com/user-attachments/assets/0952bad7-a43b-4c06-829c-6f64cd2170f3)
-![Screenshot 2025-03-27 111328](https://github.com/user-attachments/assets/000694dc-af1f-4c3c-b74f-25108a3ba206)
-![Screenshot 2025-03-27 111517](https://github.com/user-attachments/assets/5fb0ca3f-71b9-4e8c-84e1-ee3561b0dc14)
-![Screenshot 2025-03-27 111529](https://github.com/user-attachments/assets/aa0b93e0-c0d2-4340-94eb-22135237847d)
-![Screenshot 2025-03-27 111545](https://github.com/user-attachments/assets/b07edb7a-7ad5-4f99-99a0-cdd049626c84)
-![Screenshot 2025-03-27 111615](https://github.com/user-attachments/assets/edbf3f16-553d-4c7c-986c-af02e474d080)
+```
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+df=pd.read_csv("titanic_dataset.csv")
+df
+```
+![Screenshot 2025-03-27 113932](https://github.com/user-attachments/assets/477a8139-ebfa-4c78-8db1-be739a1db35e)
+```
+df.info()
+```
+![Screenshot 2025-03-27 113946](https://github.com/user-attachments/assets/dd233468-6920-462f-91c6-932e43473959)
+```
+df.shape
+```
+![Screenshot 2025-03-27 113959](https://github.com/user-attachments/assets/00cd2f53-1ca5-4bc2-ba9b-cd21e8a7dcdd)
+```
+df.set_index("PassengerId",inplace=True)
+df.describe()
+```
+![Screenshot 2025-03-27 114008](https://github.com/user-attachments/assets/3ffab54d-64da-4dd2-ad58-0b1039921df0)
+```
+df.shape
+```
+![Screenshot 2025-03-27 114021](https://github.com/user-attachments/assets/c0eee503-4d07-42ff-b3e1-e132a9090d81)
+```
+df.nunique()
+```
+![Screenshot 2025-03-27 114032](https://github.com/user-attachments/assets/a1572fd5-6e59-4575-9975-d5497f1db33d)
+```
+df["Survived"].value_counts()
+```
+![Screenshot 2025-03-27 114042](https://github.com/user-attachments/assets/2ecc29d6-8682-4c78-9d10-9934d26ac8e4)
+```
+per=(df["Survived"].value_counts()/df.shape[0]*100).round(2)
+per
+```
+![Screenshot 2025-03-27 114050](https://github.com/user-attachments/assets/5799b83d-1c70-47c0-917e-e8c37757877b)
+```
+sns.countplot(data=df,x="Survived")
+```
+![Screenshot 2025-03-27 114101](https://github.com/user-attachments/assets/884e4886-96df-4df6-b86d-2770f75e09ec)
+```
+df
+```
+![Screenshot 2025-03-27 114113](https://github.com/user-attachments/assets/32360ce0-edd1-484b-947b-a9e2a1c71b48)
+```
+df.Pclass.unique()
+```
+![Screenshot 2025-03-27 114209](https://github.com/user-attachments/assets/a732524c-1e67-456f-bdf4-39a318ef5f52)
+```
+df.rename(columns={'Sex':'Gender'},inplace=True)
+df
+```
+![Screenshot 2025-03-27 114219](https://github.com/user-attachments/assets/db14dd55-62e9-4e1f-b5b8-65d23a1d2fe9)
+```
+sns.catplot(x="Gender",col="Survived",kind="count",data=df,height=5,aspect=.7)
+```
+![Screenshot 2025-03-27 114230](https://github.com/user-attachments/assets/287b9fca-533c-4379-90ed-39068a9ba7e5)
+```
+sns.catplot(x="Survived",hue="Gender",data=df,kind="count")
+```
+![Screenshot 2025-03-27 114244](https://github.com/user-attachments/assets/607475e0-5120-45c7-b9ee-773655c18ddf)
+```
+df.boxplot(column="Age",by="Survived")
+```
+![Screenshot 2025-03-27 114256](https://github.com/user-attachments/assets/4de2d0c3-8a4e-4ad9-8ad9-09a4ee900e50)
+```
+sns.scatterplot(x=df["Age"],y=df["Fare"])
+```
+![Screenshot 2025-03-27 114317](https://github.com/user-attachments/assets/7c4346b7-0604-48a2-a9c2-9dd54ac2f66f)
+```
+sns.jointplot(x="Age",y="Fare",data=df)
+```
+![Screenshot 2025-03-27 114331](https://github.com/user-attachments/assets/ed17707e-8631-43be-99c3-b33532a33cd5)
+```
+fig, ax1 = plt.subplots(figsize=(8,5))
+plt = sns.boxplot(ax=ax1,x='Pclass',y='Age',hue='Gender',data=df)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # RESULT
